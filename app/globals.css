@@ -37,8 +37,8 @@
 }
 
 :root {
-  --background: #121719;
-  --primary: #7834b5;
+  --background: #010f3b; /* Nillion deep blue */
+  --primary: #00A3FF; /* Nillion electric blue */
 }
 
 body {

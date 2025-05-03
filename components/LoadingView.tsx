@@ -5,10 +5,14 @@ import { Loader2 } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const loadingSteps = [
-  "Scanning document... 🔍",
-  "Analyzing clauses... ⚖️",
-  "Identifying issues... 🎯",
-  "Preparing insights... 💡"
+  "Scanning document through SecretLLM... 🔐",
+  "Activating Gemma-3 model for private document analysis... 🧠",
+  "Parsing clauses while keeping your data protected and private... ⚖️",
+  "Identifying potentially risky clauses with zero data exposure... ⚠️",
+  "Uncovering hidden unfair agreements that might disadvantage you... 🔍",
+  "Discovering negotiation leverage points to strengthen your position... 💪",
+  "Structuring insights while maintaining complete confidentiality... 🛡️",
+  "Preparing your comprehensive legal analysis... almost ready! 📝"
 ];
 
 export default function LoadingView() {
@@ -17,7 +21,7 @@ export default function LoadingView() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentStep((prev) => (prev < loadingSteps.length - 1 ? prev + 1 : prev));
-    }, 1500);
+    }, 7000);
     return () => clearInterval(interval);
   }, []);
 

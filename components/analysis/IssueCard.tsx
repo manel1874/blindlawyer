@@ -13,11 +13,11 @@ interface IssueCardProps {
 export default function IssueCard({ issue, isSelected, onClick }: IssueCardProps) {
   const getTypeStyles = (type: Issue["type"]) => {
     switch (type) {
-      case "high":
+      case "riskyclause":
         return "bg-red-50 text-red-700";
-      case "medium":
+      case "unfairagreement":
         return "bg-yellow-50 text-yellow-700";
-      case "low":
+      case "negotiationopportunity":
         return "bg-green-50 text-green-700";
       default:
         return "bg-gray-50 text-gray-700";
@@ -27,7 +27,7 @@ export default function IssueCard({ issue, isSelected, onClick }: IssueCardProps
   return (
     <Card
       className={cn(
-        "p-6 cursor-pointer transition-all hover:shadow-lg bg-white rounded-xl",
+        "p-6 cursor-pointer transition-all hover:shadow-lg bg-gray-200 rounded-xl",
         isSelected && "ring-2 ring-[#7834b5]"
       )}
       onClick={onClick}
@@ -37,9 +37,9 @@ export default function IssueCard({ issue, isSelected, onClick }: IssueCardProps
           "inline-flex items-center px-3 py-1 rounded-full text-sm font-medium",
           getTypeStyles(issue.type)
         )}>
-          {issue.type === "high" ? "Critical" :
-          issue.type === "medium" ? "Warning" : 
-           issue.type === "low" ? "Good" : "Other"}
+          {issue.type === "riskyclause" ? "Risky Clause" :
+          issue.type === "negotiationopportunity" ? "Negotiation Opportunity" : 
+           issue.type === "unfairagreement" ? "Unfair Agreement" : "Other"}
         </span>
         
         <div>

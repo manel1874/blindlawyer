@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { extract, formatter } from "documind";
+import { extract } from "nildocumind/extractor/src/services/extract";
 import { v4 as uuidv4 } from "uuid";
 
 interface Issue {
@@ -17,13 +17,23 @@ interface Section {
 
 export const dynamic = "force-dynamic";
 
+// Normalize function to handle whitespace and special characters
+function normalizeText(text: string) {
+  return text.trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
 export const POST = async (req: Request) => {
   try {
     const body = await req.json();
     const fileUrl = body.fileUrl;
-
+    const extractedText = body.extractedText;
+    
     if (!fileUrl) {
       return NextResponse.json({ error: "File URL is required" }, { status: 400 });
+    }
+
+    if (!extractedText) {
+      return NextResponse.json({ error: "Extracted text is required" }, { status: 400 });
     }
 
     // Analyze the contract
@@ -42,15 +52,13 @@ export const POST = async (req: Request) => {
           ],
         },
       ],
+      model: process.env.OPENAI_MODEL,
     });
 
     const suggestions = analyzedText?.data?.contractSuggestions || [];
     if (!Array.isArray(suggestions) || suggestions.length === 0) {
       return NextResponse.json({ error: "No contract suggestions found." }, { status: 400 });
     }
-
-    // Extract plaintext from the file
-    const extractedText = await formatter.plaintext({ file: fileUrl });
 
     // Initialize result with explicit types
     const result: { issues: Issue[]; sections: Section[] } = {
@@ -70,12 +78,23 @@ export const POST = async (req: Request) => {
         description: suggestion.description,
       });
 
-      // Find the range for `exactClause`
-      const start = extractedText.indexOf(suggestion.exactClause);
-      const end = start + suggestion.exactClause.length;
+      let start = 0;
+      let end = 0;
 
-      if (start === -1 || end === -1) {
-        console.warn(`Could not find exactClause in extracted text: ${suggestion.exactClause}`);
+      // Find the range for `exactClause`
+      const normalizedExtractedText = normalizeText(extractedText);
+      const normalizedClause = normalizeText(suggestion.exactClause.slice(0, 3));
+
+      // Use includes instead of exact match with indexOf
+      const hasMatch = normalizedExtractedText.includes(normalizedClause);
+
+      if (!hasMatch) {
+        console.warn(`Could not find exactClause in extracted text: ${suggestion.normalizedClause}`);
+        // Optional: Implement fuzzy matching here
+      } else {
+        // Find the actual position in the original text
+        start = extractedText.toLowerCase().indexOf(suggestion.exactClause.toLowerCase());
+        end = start + suggestion.exactClause.length;
       }
 
       // Add to sections array
