@@ -13,7 +13,7 @@ Blind Lawyer is a **private contract analysis tool** powered by Nillion's blind 
 - **Unfair Agreements Detection**: Detects unfair terms that you shouldn't agree to.
 
 ## Technologies Used and Developed
-- [**blinddocumind**](https://github.com/DocumindHQ/documind): A privacy-first toolkit for extracting structured data from uploaded contracts and legal agreements, ensuring sensitive information stays fully protected. This builds on top of [Documind](https://github.com/DocumindHQ/documind).
+- [**blinddocumind**](https://github.com/manel1874/blinddocumind): A privacy-first toolkit for extracting structured data from uploaded contracts and legal agreements, ensuring sensitive information stays fully protected. This builds on top of [Documind](https://github.com/DocumindHQ/documind).
 - **Analysis Engine**: Powered by Nillion’s blind computation [SecretLLM](https://docs.nillion.com/build/secretLLM/overview) module, now enhanced with:
   - [Gemma-3 4B model](https://huggingface.co/google/gemma-3-4b-it) for high-accuracy, fully private document analysis and image processing;
   - OpenAI’s beta [Structured Outputs API](https://openai.com/index/introducing-structured-outputs-in-the-api/) for precise, structured LLM responses.
@@ -68,6 +68,52 @@ OPENAI_MODEL="google/gemma-3-4b-it"
    ```
 
    The application will be available at [http://localhost:3000](http://localhost:3000).
+
+  ```bash
+  > blindlawyer@0.1.0 dev
+  > next dev
+
+    ▲ Next.js 13.5.1
+    - Local:        http://localhost:3000
+    - Environments: .env
+    - Experiments (use at your own risk):
+      · outputFileTracingIncludes
+      · serverComponentsExternalPackages
+
+  ✓ Ready in 2.3s
+  ```
+2. **Main page:** choose your favourite contract to be analyzed.
+
+<p align="center">
+  <img src="public/main_page.png" alt="Main Page" width="450" />
+</p>
+
+<p align="center">
+  <img src="public/choose_pdf.png" alt="Main Page" width="450" />
+</p>
+
+3. **Process text:** start by processing the text from the pdf contract.
+
+<p align="center">
+  <img src="public/processing.png" alt="Main Page" width="450" />
+</p>
+
+<p align="center">
+  <img src="public/processed_result.png" alt="Main Page" width="450" />
+</p>
+
+4. **Analyze contract:** analyzes the contract and output three types of cards:
+- Risky Clauses.
+- Negotiation Opportunities.
+- Unfair Agreements.
+
+<p align="center">
+  <img src="public/analyzing.png" alt="Main Page" width="450" />
+</p>
+
+<p align="center">
+  <img src="public/result.png" alt="Main Page" width="450" />
+</p>
 
 ## License
 This project is open-source under the [MIT License](LICENSE).
