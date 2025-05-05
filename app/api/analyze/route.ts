@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { extract } from "nildocumind/extractor/src/services/extract";
+import { extract } from "blinddocumind/extractor/src/services/extract";
 import { v4 as uuidv4 } from "uuid";
 
 interface Issue {

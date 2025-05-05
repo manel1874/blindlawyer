@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { formatter } from "nildocumind/extractor/src/services/formatter"; // Using nildocumind for PDF processing
+import { formatter } from "blinddocumind/extractor/src/services/formatter"; // Using blinddocumind for PDF processing
 import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { v4 as uuidv4 } from "uuid";
 
 require('dotenv').config({ override: true });
-// Make sure environment variables are available to nildocumind
+// Make sure environment variables are available to blinddocumind
 if (process.env.OPENAI_BASE_URL) {
   process.env.BASE_URL = process.env.OPENAI_BASE_URL;
 }
@@ -43,11 +43,11 @@ export const POST = async (req: Request) => {
     const uint8Array = new Uint8Array(arrayBuffer);
     await writeFile(filePath, uint8Array);
 
-    // Extract text using nildocumind if needed
-    // You can use the local file path directly if your nildocumind version supports it
+    // Extract text using blinddocumind if needed
+    // You can use the local file path directly if your blinddocumind version supports it
     // or you can create a file:// URL
 
-    // Use nildocumind directly
+    // Use blinddocumind directly
     const extractedText = await formatter.plaintext({ file: filePath, model: process.env.OPENAI_MODEL });
 
     return NextResponse.json({

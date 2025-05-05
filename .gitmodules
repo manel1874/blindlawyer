@@ -1,0 +1,3 @@
+[submodule "blinddocumind"]
+	path = blinddocumind
+	url = git@github.com:manel1874/blinddocumind.git

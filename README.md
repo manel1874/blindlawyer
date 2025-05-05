@@ -13,7 +13,7 @@ Blind Lawyer is a **private contract analysis tool** powered by Nillion's blind 
 - **Unfair Agreements Detection**: Detects unfair terms that you shouldn't agree to.
 
 ## Technologies Used and Developed
-- [**nilDocumind**](https://github.com/DocumindHQ/documind): A privacy-first toolkit for extracting structured data from uploaded contracts and legal agreements, ensuring sensitive information stays fully protected. This builds on top of [Documind](https://github.com/DocumindHQ/documind).
+- [**blinddocumind**](https://github.com/DocumindHQ/documind): A privacy-first toolkit for extracting structured data from uploaded contracts and legal agreements, ensuring sensitive information stays fully protected. This builds on top of [Documind](https://github.com/DocumindHQ/documind).
 - **Analysis Engine**: Powered by Nillion’s blind computation [SecretLLM](https://docs.nillion.com/build/secretLLM/overview) module, now enhanced with:
   - [Gemma-3 4B model](https://huggingface.co/google/gemma-3-4b-it) for high-accuracy, fully private document analysis and image processing;
   - OpenAI’s beta [Structured Outputs API](https://openai.com/index/introducing-structured-outputs-in-the-api/) for precise, structured LLM responses.
